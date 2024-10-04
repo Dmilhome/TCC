@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Verificador de Interações Medicamentosas</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            height: 100vh;
+        }
+
+        .form-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            padding: 20px;
+        }
+
+        .info-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #20c997; /* Cor verde */
+            color: white;
+            padding: 20px;
+        }
+
+        .form-container, .info-container {
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo {
+            max-width: 150px; /* Reduzindo o tamanho da logo */
+            margin: 0 auto 10px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        label {
+            display: block;
+            text-align: left; /* Alinhando à esquerda */
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        input[type="email"],
+        input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: calc(100% - 22px);
+            margin-bottom: 15px;
+        }
+
+        .login-button {
+            padding: 15px;
+            font-size: 16px;
+            background-color: #20c997; /* Cor verde */
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .login-button:hover {
+            background-color: #18a587;
+        }
+
+        .white-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: white; /* Botão branco */
+            color: #20c997; /* Texto verde */
+            border: 2px solid #20c997;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .white-button:hover {
+            background-color: #18a587; /* Botão verde escuro ao passar o mouse */
+            color: white;
+        }
+
+        .links {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .links a {
+            color: #20c997; /* Cor verde */
+            text-decoration: none;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-section">
+        <div class="form-container">
+            <img src="logo.png" alt="Logo" class="logo">
+            <h2>Criar uma Conta</h2>
+            <form id="cadastroForm">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="nome@exemplo.com" required>
+
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Senha" required>
+
+                <button type="submit" class="login-button">Cadastrar</button>
+            </form>
+            <div class="links">
+                <p>Já tem uma conta? <a href="index.html">Entrar</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="info-section">
+        <div class="info-container">
+            <h2>Olá,</h2>
+            <p>Cadastre-se e comece a usar nosso verificador de interações medicamentosas!</p>
+            <button class="white-button" onclick="window.location.href='index.html'">ENTRAR</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('cadastroForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Previne o envio padrão do formulário
+
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            // Verifica se já existe um usuário com este e-mail
+            if (localStorage.getItem(email)) {
+                alert('E-mail já cadastrado!');
+            } else {
+                // Armazena o e-mail e a senha no localStorage (não recomendado para produção)
+                localStorage.setItem(email, senha);
+                alert('Você foi registrado com sucesso!');
+                window.location.href = 'index.html'; // Redireciona para a página de login
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Interações Medicamentosas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="Logo" class="logo">
+
+        <h2>Verificador de Interações Medicamentosas</h2>
+        <label for="medicamento1">Digite o primeiro medicamento:</label>
+        <div class="suggestions">
+            <input type="text" id="medicamento1" placeholder="Digite o medicamento...">
+            <ul id="sugestoes1" class="suggestions-list"></ul>
+        </div>
+
+        <label for="medicamento2">Digite o segundo medicamento:</label>
+        <div class="suggestions">
+            <input type="text" id="medicamento2" placeholder="Digite o medicamento...">
+            <ul id="sugestoes2" class="suggestions-list"></ul>
+        </div>
+
+        <button id="verificarInteracoes">Verificar Interações</button>
+
+        <table id="tabelaResultado" style="display: none;">
+            <thead>
+                <tr>
+                    <th>Medicamento 1</th>
+                    <th>Medicamento 2</th>
+                    <th>Gravidade</th>
+                    <th>Efeito Clínico</th>
+                    <th>Recomendação</th>
+                </tr>
+            </thead>
+            <tbody id="corpoResultado">
+                <!-- Resultados serão inseridos aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="lista.js"></script>
+    <script>
+        // Função para mostrar sugestões ao digitar o medicamento
+        function mostrarSugestoes(input, sugestoes) {
+            const valor = input.value.toLowerCase().trim();
+            sugestoes.innerHTML = '';
+
+            if (valor.length > 0) {
+                const medicamentosFiltrados = Object.keys(interacoes).filter(medicamento =>
+                    medicamento.toLowerCase().includes(valor)
+                );
+
+                medicamentosFiltrados.forEach(medicamento => {
+                    const item = document.createElement('li');
+                    item.textContent = medicamento;
+                    item.addEventListener('click', () => {
+                        input.value = medicamento;
+                        sugestoes.innerHTML = '';
+                    });
+                    sugestoes.appendChild(item);
+                });
+            }
+        }
+
+        // Vincular sugestões aos inputs
+        document.getElementById('medicamento1').addEventListener('input', function() {
+            mostrarSugestoes(this, document.getElementById('sugestoes1'));
+        });
+
+        document.getElementById('medicamento2').addEventListener('input', function() {
+            mostrarSugestoes(this, document.getElementById('sugestoes2'));
+        });
+
+        // Verificar interações ao clicar no botão
+        document.getElementById('verificarInteracoes').addEventListener('click', function() {
+            const med1 = document.getElementById('medicamento1').value.trim();
+            const med2 = document.getElementById('medicamento2').value.trim();
+            const corpoResultado = document.getElementById('corpoResultado');
+            const tabelaResultado = document.getElementById('tabelaResultado');
+            corpoResultado.innerHTML = '';
+
+            // Procurar a interação no script
+            const interacao = interacoes[med1]?.[med2] || interacoes[med2]?.[med1];
+
+            if (med1 && med2) {
+                if (interacao) {
+                    const linha = `<tr>
+                        <td>${med1}</td>
+                        <td>${med2}</td>
+                        <td class="gravidade-${interacao.gravidade.toLowerCase()}">${interacao.gravidade}</td>
+                        <td>${interacao.efeitoClinico}</td>
+                        <td>${interacao.recomendacao}</td>
+                    </tr>`;
+                    corpoResultado.innerHTML += linha;
+                    tabelaResultado.style.display = 'table';
+                } else {
+                    const linha = `<tr>
+                        <td colspan="5">Nenhuma interação encontrada entre ${med1} e ${med2}.</td>
+                    </tr>`;
+                    corpoResultado.innerHTML += linha;
+                    tabelaResultado.style.display = 'table';
+                }
+            } else {
+                alert('Por favor, digite dois medicamentos.');
+            }
+        });
+    </script>
+</body>
+</html>

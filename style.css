@@ -1,0 +1,159 @@
+/* Corpo do documento */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7f1; /* Cor clara baseada na logo */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container principal */
+.container {
+    max-width: 800px;
+    width: 100%;
+    background-color: white; /* Parte de dentro */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Logo */
+.logo {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 150px;
+}
+
+/* Título */
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #20c997; /* Cor verde */
+}
+
+/* Labels */
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Campos de texto */
+input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 22px);
+    margin-bottom: 15px;
+}
+
+/* Botão principal */
+button {
+    padding: 15px;
+    font-size: 16px;
+    background-color: #20c997; /* Cor verde */
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #18a587;
+}
+
+/* Tabela de resultados */
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.result-table th, .result-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.result-table th {
+    background-color: #f0f0f0;
+    color: #20c997; /* Cor verde */
+}
+
+/* Diferentes gravidades */
+.gravidade-leve {
+    color: #006400; /* Verde escuro */
+    font-weight: bold;
+    text-align: center;
+}
+
+.gravidade-moderada {
+    color: #FF8C00; /* Amarelo alaranjado */
+    font-weight: bold;
+    text-align: center;
+}
+
+.gravidade-grave {
+    color: #8B0000; /* Vermelho escuro */
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Sugestões */
+.suggestions {
+    position: relative;
+}
+
+.suggestions-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    background: white;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Itens da lista de sugestões */
+.suggestions-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestions-list li:hover {
+    background-color: #20c997; /* Cor verde */
+    color: white;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    input[type="text"] {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
